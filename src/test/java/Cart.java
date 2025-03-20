@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Cart {
@@ -22,6 +23,14 @@ public class Cart {
   }
 
   public void removeProduct(Product product) {
+    products.remove(product);
+  }
+
+  public void removeAllProducts() {
     products.clear();
+  }
+
+  public List<Product> getProducts() {
+    return products;
   }
 }
