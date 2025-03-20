@@ -20,4 +20,24 @@ class CatalogTest {
     HashMap<Product, Integer> PriceList = new HashMap<>();
     assertThrows(IllegalArgumentException.class, () -> new Catalog(new Date(), PriceList));
   }
+
+  @Test
+  void AskPriceOfAProductAndItsExists_002() {
+    Product product = new Product("product");
+    HashMap<Product, Integer> PriceList = new HashMap<>();
+    PriceList.put(product, 100);
+    Catalog catalog = new Catalog(new Date(), PriceList);
+    assertEquals(100, catalog.getPrice(product));
+  }
+
+  @Test
+  void AskPriceOfAProductAndItNotExists_003() {
+    Product product = new Product("product1");
+    HashMap<Product, Integer> PriceList = new HashMap<>();
+    PriceList.put(product, 100);
+    Product product2 = new Product("product2");
+
+    Catalog catalog = new Catalog(new Date(), PriceList);
+    assertEquals(0, catalog.getPrice(product2));
+  }
 }

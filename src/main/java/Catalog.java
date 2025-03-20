@@ -15,4 +15,7 @@ public class Catalog {
     this.priceList = priceList;
   }
 
+  public int getPrice(Product product) {
+    return priceList.getOrDefault(product, 0);
+  }
 }
