@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CartTest {
 
+  public static final Product PAPAS = new Product("Papas");
+
   @Test
   void CreateCart_001() {
     Cart cart1 = new Cart();
@@ -19,14 +21,14 @@ public class CartTest {
   @Test
   void AddProductToCart_003() {
     Cart cart1 = new Cart();
-    cart1.addProduct(new Product());
+    cart1.addProduct(PAPAS);
     assertFalse(cart1.isEmpty());
   }
 
   @Test
   void RemoveProductFromCart_004() {
     Cart cart1 = new Cart();
-    Product product1 = new Product();
+    Product product1 = PAPAS;
     cart1.addProduct(product1);
     assertFalse(cart1.isEmpty());
 
@@ -37,9 +39,7 @@ public class CartTest {
   @Test
   void EmptyACart_005() {
     Cart cart1 = new Cart();
-    cart1.addProduct(new Product());
-    cart1.addProduct(new Product());
-    cart1.addProduct(new Product());
+    cart1.addProduct(PAPAS);
     assertFalse(cart1.isEmpty());
 
     cart1.removeAllProducts();
@@ -49,7 +49,7 @@ public class CartTest {
   @Test
   void RemoveProductFromEmptyCart_006() {
     Cart cart1 = new Cart();
-    Product product1 = new Product();
+    Product product1 = PAPAS;
     cart1.removeProduct(product1);
     assertTrue(cart1.isEmpty());
   }
@@ -64,10 +64,10 @@ public class CartTest {
   @Test
   void AddMoreThan1ProductToCart_008() {
     Cart cart1 = new Cart();
-    cart1.addProduct(new Product());
-    cart1.addProduct(new Product());
-    cart1.addProduct(new Product());
+    cart1.addProduct(PAPAS);
+    cart1.addProduct(PAPAS);
+
     assertFalse(cart1.isEmpty());
-    assertTrue(cart1.getProducts().size() == 3);
+    assertEquals(2, cart1.getProducts().size());
   }
 }
