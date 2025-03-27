@@ -32,4 +32,8 @@ public class Cart {
   public List<Product> getProducts() {
     return products;
   }
+
+  public boolean containsProduct(Product product) {
+    return products.contains(product);
+  }
 }

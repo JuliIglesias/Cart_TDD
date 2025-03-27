@@ -18,4 +18,8 @@ public class Catalog {
   public int getPrice(Product product) {
     return priceList.getOrDefault(product, 0);
   }
+
+  public void addProduct(Product product, int i) {
+    priceList.put(product, i);
+  }
 }
