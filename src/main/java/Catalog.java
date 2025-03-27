@@ -15,11 +15,14 @@ public class Catalog {
     this.priceList = priceList;
   }
 
-  public int getPrice(Product product) {
-    return priceList.getOrDefault(product, 0);
+  public int getPriceOf(Product product) throws IllegalArgumentException {
+    if (!priceList.containsKey(product)) {
+      throw new IllegalArgumentException("Product not found");
+    }
+    return priceList.get(product);
   }
 
-  public void addProduct(Product product, int i) {
+  public void addProductBy(Product product, int i) {
     priceList.put(product, i);
   }
 }

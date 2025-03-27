@@ -31,7 +31,7 @@ class CatalogTest {
     HashMap<Product, Integer> PriceList = new HashMap<>();
     PriceList.put(product, 100);
     Catalog catalog = new Catalog(new Date(), PriceList);
-    assertEquals(100, catalog.getPrice(product));
+    assertEquals(100, catalog.getPriceOf(product));
   }
 
   @Test
@@ -42,18 +42,18 @@ class CatalogTest {
     Product product2 = new Product("product2");
 
     Catalog catalog = new Catalog(new Date(), PriceList);
-    assertEquals(0, catalog.getPrice(product2));
+    assertThrows(IllegalArgumentException.class, () -> catalog.getPriceOf(product2));
   }
 
   @Test
-  public void AddProductToCatalog_004() {
+  public void AddProductByToCatalog_004() {
     Product product = new Product("product");
     Product product1 = new Product("product1");
     HashMap<Product, Integer> PriceList = new HashMap<>();
     PriceList.put(product1, 1000);
     Catalog catalog = new Catalog(new Date(), PriceList);
-    catalog.addProduct(product, 100);
-    assertEquals(100, catalog.getPrice(product));
+    catalog.addProductBy(product, 100);
+    assertEquals(100, catalog.getPriceOf(product));
   }
 
   @Test
@@ -64,8 +64,8 @@ class CatalogTest {
     PriceList.put(product1, 100);
     PriceList.put(product2, 200);
     Catalog catalog = new Catalog(new Date(), PriceList);
-    assertEquals(100, catalog.getPrice(product1));
-    assertEquals(200, catalog.getPrice(product2));
+    assertEquals(100, catalog.getPriceOf(product1));
+    assertEquals(200, catalog.getPriceOf(product2));
   }
 
   @Test
@@ -75,7 +75,7 @@ class CatalogTest {
     HashMap<Product, Integer> PriceList = new HashMap<>();
     PriceList.put(product1, 100);
     Catalog catalog = new Catalog(new Date(), PriceList);
-    assertEquals(100, catalog.getPrice(product1));
-    assertEquals(0, catalog.getPrice(product2));
+    assertEquals(100, catalog.getPriceOf(product1));
+    assertThrows(IllegalArgumentException.class, () -> catalog.getPriceOf(product2));
   }
 }
