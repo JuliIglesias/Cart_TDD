@@ -9,4 +9,22 @@ public class Cashier {
     }
     return total;
   }
+
+  public Invoice charge(Cart cart, Catalog catalog, CreditCard creditCard, IMerchantProcessor merchantProcessor) {
+    int totalPrice = totalPriceOf(cart, catalog);
+
+    //new MerchantProcessor(); NUNCA se debe instanciar en el método0, se debe pasar como parámetro
+    // API para cobrar, es como el aparato de los locales de Mercado Pago
+
+    Boolean isOk = merchantProcessor.validate(creditCard, totalPrice);
+    if (!isOk) {
+      throw new RuntimeException("Invalid credit card");
+    }
+    Boolean isPaymentOk = merchantProcessor.charge(creditCard, totalPrice);
+    if (isPaymentOk) {
+      return new Invoice(totalPrice);
+    } else {
+      throw new RuntimeException("Payment rejected");
+    }
+  }
 }

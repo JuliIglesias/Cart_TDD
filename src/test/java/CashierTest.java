@@ -2,7 +2,7 @@
 /*
 Cobrarlo
     -Recibir el metodo de pago
-    -Calcular el precio del carrito
+    -Calcular el precio del carrito DONE
         - Aplicar desucnetos
     -Entrega factura depsues de pago
 
@@ -34,5 +34,28 @@ public class CashierTest {
     Cashier cashier = new Cashier();
 
     assertEquals(300, cashier.totalPriceOf(cart, catalog));
+  }
+
+  @Test
+  public void CashierCobraCarritoAndEmiteFactura_002(){
+    Product product1 = new Product("product1");
+    Product product2 = new Product("product2");
+    HashMap<Product, Integer> PriceList = new HashMap<>();
+    PriceList.put(product1, 100);
+    PriceList.put(product2, 200);
+    Catalog catalog = new Catalog(new Date(), PriceList);
+
+    Cart cart = new Cart();
+    cart.addProduct(product1);
+    cart.addProduct(product2);
+
+    Cashier cashier = new Cashier();
+    CreditCard creditCard = new CreditCard("123456789", "123", "12/23");
+
+    MerchantProcessorSinSaldo merchantProcessor = new MerchantProcessorSinSaldo();
+
+    Invoice anInvoice = cashier.charge(cart, catalog, creditCard, merchantProcessor);
+
+    assertEquals(300, anInvoice.totalAmount());
   }
 }
